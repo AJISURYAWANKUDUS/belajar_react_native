@@ -1,13 +1,22 @@
 import React, {Component} from 'react';
-import { Container, Button, Text } from 'native-base';
+import {
+    ScrollView,
+    Text,
+    TextInput,
+    View,
+    Button
+} from 'react-native';
 export default class Login extends Component{
     render(){
         return(
-            <Container>
-                <Button>
-                    <Text>Button</Text>
-                </Button>
-            </Container>
+            <ScrollView style={{padding:20}}>
+                <Text style={{fontSize:27}}>Login</Text>
+                <TextInput placeholder="username"></TextInput>
+                <TextInput placeholder="password"></TextInput>
+                <View style={{margin:7}}></View>
+                <Button onPress={this.props.onLoginPress}
+                title="submit"></Button>
+            </ScrollView>
         );
     }
 }

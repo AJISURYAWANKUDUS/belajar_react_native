@@ -7,7 +7,7 @@
  */
 
 import React, { Component } from "react";
-import { TextInput, View, StyleSheet,Button,Text,TouchableHighlight,FlatList} from "react-native";
+import { TextInput, View, StyleSheet,Button,Text,TouchableHighlight,FlatList,Alert} from "react-native";
 import { getuserlogin } from './src/service/fetch_login';
 // const instructions = Platform.select({
 //   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -22,20 +22,28 @@ export default class App extends Component {
     super(props);
     this.state = {
       isLoading :true,
-      email: ""
+      // email: "",
       // password: ""
     };
   }
-onClickListener = (viewId)=>{
-return fetch('https://facebook.github.io/react-native/movies.json')
-.then((response)=>response.json())
+componentDidMount(){
+  const data={username:"idris",password:"idris123"};
+  return fetch('http://192.168.88.188/movie/android/login_react.php?username=${encodeURIComponent(data.username)}&password=${encodeURIComponent(data.password)}',{
+  method:'GET'
+})
+// .then((response)=>response.json())
 .then((responseJson)=>{
-  this.setState({
-    isLoading:false,
-    dataSource:responseJson.movies,
-  },function(){
+  // this.setState({
+  //   isLoading:false,
+  //   dataSource:responseJson.username,
+  // },function(){
 
-  });
+  // });
+  // Alert.alert(
+  //   "Response Body -> " + JSON.stringify(responseJson)
+  // )
+  console.log("Response Body -> " + JSON.stringify(responseJson)
+  )
 })
 .catch((error)=>{
   console.error(error);
@@ -71,16 +79,27 @@ return fetch('https://facebook.github.io/react-native/movies.json')
           {/* <Button 
           onPress={this.login_button}
           title="Login"/> */}
-          <View style={styles.inputContainer}>
+          {/* <View>
           <FlatList
             data={this.state.dataSource}
-            renderItem={({item})=><Text>{item.title}</Text>}
-            keyExtractor={({id},index)=>id}>            
-          </FlatList>
-          </View>
+            renderItem={({item})=><Text>{item}</Text>}
+            // keyExtractor={({id_movie},index)=>id_movie}            
+          />
+          </View> */}
       </View>
     );
   }
+// state={
+//   isLoggedIn :false
+// }
+// render(){
+//   if(this.state.isLoggedIn){
+//     return ;
+//   }else{
+//     return ;
+//   }
+// }
+
 }
 
 const styles = StyleSheet.create({
